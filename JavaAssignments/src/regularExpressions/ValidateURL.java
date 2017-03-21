@@ -11,10 +11,7 @@ public class ValidateURL {
         System.out.println("Enter an url string..");
         String url = sc.next();
         
-//          the actual regular expression is 'https?:\/\/[www.]?'..
-//      but in string literal '\' is used twice to tell jvm that,
-//      '\' is actually a part of the string pattern. 
-        String patternString = "https?:\\/\\/[www.]?";
+        String patternString = "https?://[www.]?";
         
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(url);
