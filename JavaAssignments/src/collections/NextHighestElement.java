@@ -15,7 +15,7 @@ public class NextHighestElement {
         int[] arr = {10, 30, 50, 67, 34, 68};
         //   treemap stores elements in ascending order of keys
         // since it implemets SortedMap interface..
-        TreeMap<Integer, Integer> tmap = new TreeMap<Integer, Integer>();
+        TreeMap<Integer, Byte> tmap = new TreeMap<Integer, Byte>();
         
         for(int i:arr)
             tmap.put(i, null);
@@ -24,29 +24,12 @@ public class NextHighestElement {
         Scanner sc = new Scanner(System.in);
         int x = sc.nextInt();
         
-        Integer element = null;
-        Map.Entry<Integer,Integer> me;
-        Iterator itr = tmap.entrySet().iterator();
-        while(itr.hasNext()){
-             me = (Map.Entry)itr.next();
-             int key = me.getKey();
-             if(key >= x){
-                if(key > x){
-                    System.out.print("next highest element than "+x+" is:");
-                    System.out.println(me.getKey());
-                    return;
-                }
-                break;
-             }
-        }
-            
-        //get the nest element from treemap
-        if(itr.hasNext()){
-            me = (Map.Entry)itr.next();
+        Integer element = tmap.higherKey(x); 
+        if( element != null){
             System.out.print("next highest element than "+x+" is:");
-            System.out.println(me.getKey());
-        }else
+            System.out.println(element);
+        } else
             System.out.println("ther is no element greater than "+x+" exists");
-        
+            
     }//main() method
 }
