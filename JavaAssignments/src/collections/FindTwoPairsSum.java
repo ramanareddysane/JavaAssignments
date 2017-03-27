@@ -37,7 +37,7 @@ public class FindTwoPairsSum {
     } // for entire set of 2 pairs
     
     public static void main(String[] args) {
-        int arr[]= {3,5,4,7,1,2,5};
+        int arr[]= {3, 4, 6,1,2,5,8,2};
         if(!findPairs(arr))
             System.out.println("No such pairs exits in this array");
     }
@@ -47,6 +47,8 @@ public class FindTwoPairsSum {
         HashMap<Integer,Set> hmap = new HashMap<>(); //(sum,pair)
         for(int i=0;i<a.length;i++)
             for(int j=i+1;j<a.length;j++){
+                if(a[i] == a[j])
+                    continue; //we don't want such pair
                 Pair present = new Pair(a[i],a[j]);
                 int sum = a[i]+a[j];
                 if(!hmap.containsKey(sum))
@@ -56,16 +58,20 @@ public class FindTwoPairsSum {
                     if(set.pair2 == null){ // simply update it
                         set.pair2 = new Pair(a[i],a[j]);
                         pair_exists = true;
-                    }
-                    if(!set.pair2.equals(present) && !set.pair1.equals(present)){ // then it is different pair
-                        System.out.print("Sum:"+sum+" ");
-                        System.out.println("{"+ set.pair2 + present +"}");
+                        if(!set.pair1.equals(set.pair2)) // a,b,c,d must be different
+                            System.out.println("Sum:"+sum+" "+set);
+                    }else if(!present.equals(set.pair1) && !present.equals(set.pair2)){ // then it is different pair
+                        //create a new set with same first pair but differnet 
+                        //second pair, and add it to hash map
+                        Set set1 = new Set(set.pair1,present);
+                        hmap.put(sum, set1);
+                        System.out.println("Sum:"+sum+" "+set1);
                     }
                 } // end of else
             } //end of inner for loop
         //end of outer for loop(no brackets though)
         return pair_exists;
-    }   
+    }
 }
 
 /*
