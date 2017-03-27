@@ -56,9 +56,10 @@ public class FindTwoPairsSum {
                     if(set.pair2 == null){ // simply update it
                         set.pair2 = new Pair(a[i],a[j]);
                         pair_exists = true;
-                    }else if(!set.pair2.equals(present) && !set.pair1.equals(present)){ // then it is different pair
+                    }
+                    if(!set.pair2.equals(present) && !set.pair1.equals(present)){ // then it is different pair
                         System.out.print("Sum:"+sum+" ");
-                        System.out.println(hmap.get(sum));
+                        System.out.println("{"+ set.pair2 + present +"}");
                     }
                 } // end of else
             } //end of inner for loop
